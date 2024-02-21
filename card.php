@@ -1,14 +1,18 @@
 <?php
-    // バトルするカードについての処理
+    // カードについての処理
     class Card {
-        public $suit;
-        public $rank;
-        public $strength;
-        // 一回ずつ勝負させるので上書きする
+        private $suit;
+        private $rank;
+        private $strength;
+        // 上書きする
         public function __construct($suit, $rank, $strength) {
             $this->suit = $suit;
-            $this->rank = $suit;
+            $this->rank = $rank;
             $this->strength = $strength;
+        }
+        // 何のカードか出力
+        public function __toString() {
+            return "{$this->suit}の{$this->rank}です";
         }
     }
 ?>
