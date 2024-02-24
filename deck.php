@@ -14,9 +14,6 @@
         }
             shuffle($this->cards);
         }
-        public function getCardCount() {
-            return count($this->cards);
-        }
         public function isEmpty() {
             return empty($this->cards);
         }
