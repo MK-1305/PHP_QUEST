@@ -8,12 +8,16 @@
             $this->name = $name;
         }
 
-        // プレイヤーがカードを引く処理
-        public function draw($deck) {
-            $this->hand[] = $deck->deal();
+        // プレイヤーがカードを手札に追加する
+        public function draw(Card $card) {
+            $this->hand[] = $card; // 引数で受け取ったCardオブジェクトを手札に追加
         }
         // プレイヤーがカードを出す処理
         public function playCard() {
             return array_shift($this->hand);
+        }
+        // 相手のカードを手札に加える
+        public function addHand($card) {
+            $this->hand[] = $card;
         }
     }
