@@ -12,7 +12,11 @@
         }
         // 何のカードか出力
         public function __toString() {
-            return "{$this->suit}の{$this->rank}です";
+            return $this->suit . 'の' . $this->rank;
+        }
+        public function getStrength() {
+            return $this->strength;
         }
     }
+    // var_dump($suite);
 ?>
