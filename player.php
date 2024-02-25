@@ -2,6 +2,7 @@
     class Player {
     public $name;
     private $hand = [];
+    private $takeHand = [];
 
     public function __construct($name) {
         $this->name = $name;
@@ -33,12 +34,15 @@
     // 相手のカードを手札に加える
     public function addHand($cards) {
         foreach ($cards as $card) {
-            $this->hand[] = $card;
+            $this->takeHand[] = $card;
         }
     }
 
+    // 勝ち取ったカードを返す
+    
+
     // プレイヤーの手札の枚数を数える
     public function countHand() {
-        return count($this->hand);
+        return count($this->takeHand);
     }
 }
