@@ -24,14 +24,17 @@
             for ($i = 0; $i < $this->playerCount; $i++) {
                 $this->addPlayer("プレイヤー" . ($i + 1));
             }
-            // プレイヤーにカードを配る（デッキの中が空になるまでカードを引く）
+            // プレイヤーにカードを配る
             while (!$this->deck->isEmpty()) {
                 foreach ($this->players as $player) {
                     if (!$this->deck->isEmpty()) {
+                        // 配られたカードをプレイヤーの手札[hand]に加える
                         $player->draw($this->deck->deal());
                     }
                 }
             }
+            echo "カードが配られました。";
+            var_dump($this->players);
         }
         // 手札がなくなったかをチェック
         private function isGameOver() {
@@ -44,10 +47,11 @@
         }
 
         public function battle() {
-            echo "戦争を開始します。" . PHP_EOL;
+            $this->start();
             $battlefield = []; // 場札を保持する配列
-
+            
             while (!$this->isGameOver()) {
+                echo "戦争！" . PHP_EOL;
                 $cards = [];
                 foreach ($this->players as $index => $player) {
                     if ($player->isHandEmpty()) {
@@ -69,8 +73,8 @@
                     $this->players[1]->addHand($battlefield);
                     $battlefield = []; // 場札をクリア
                 } else {
-                    echo "引き分けです。次のラウンドへ。" . PHP_EOL;
-                    // 引き分けの場合、場札にカードを残し次のラウンドへ
+                    echo "引き分けです。" . PHP_EOL;
+                    $battlefield = []; // 場札をクリア
                 }
             }
             $this->displayResult(); // ゲーム終了時に結果を表示
@@ -92,33 +96,7 @@
             }
             echo "戦争を終了します。" . PHP_EOL;
         }
-
-
-
-            // player1とplayer2のカードを出力（配列ではなく変数で）
-            // 勝ったプレイヤーの手元に負けたプレイヤーのカードと自分のカードを入れる
-            // それをデッキが0になるまで繰り返す
-            // プレイヤーの手元のカードが多い方が一位、少ない方が
-        // 「playCardとplayerHandのカードが違う」
-        // カードの比較、引き分け処理、勝敗
-        //     $player1Hand = $this->players[0]->getHand();
-        //     $player2Hand = $this->players[1]->getHand();
-        //     var_dump($player1Hand[0]);
-        //     var_dump($player2Hand[0]);
-        //     if ($player1Hand[0]->getStrength() > $player2Hand[0]->getStrength()) {
-        //         echo "プレイヤー1が勝ちました。";
-        //     } elseif ($player1Hand[0]->getStrength() == $player2Hand[0]->getStrength()) {
-        //         echo "引き分けです。" . PHP_EOL;
-        //         $this->battle();
-        //     } else {
-        //         echo "プレイヤー2が勝ちました。";
-        //     }
-        // }
-
-        // カードの比較、引き分けの処理
-        // 勝者の決定
     }
     // var_dump($cards);
     $game = new Game();
-    $game->start();
     $game->battle();
